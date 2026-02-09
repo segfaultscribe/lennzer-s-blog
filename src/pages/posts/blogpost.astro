@@ -1,0 +1,35 @@
+---
+import * as greatPost from './post-2.md';
+import { Content } from './post-2.md';
+// import '../../styles/global.css';
+import '../../styles/blog.css';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<Navigation />
+<!-- <div>
+    {greatPost.frontmatter.hero && (
+    <img
+      src={greatPost.frontmatter.hero}
+      alt=""
+      class="blog-hero"
+      loading="eager"
+    />
+  )}
+</div> -->
+<article class="blog">
+
+  <h1 class="blog-title">{greatPost.frontmatter.title}</h1>
+  <time class="blog-date">{greatPost.frontmatter.date}</time>
+
+  <div class="blog-content">
+    <Content />
+  </div>
+</article>
+
+<Footer />

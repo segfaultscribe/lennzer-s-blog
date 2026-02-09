@@ -1,0 +1,31 @@
+---
+import "../styles/blog.css";
+import Navigation from '../components/Navigation.astro';
+const { title, date, hero } = Astro.props;
+---
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<Navigation />
+<div class="hero-wrap">
+    {hero && (
+    <img
+      src={hero}
+      alt=""
+      class="blog-hero"
+      loading="eager"
+    />
+  )}
+  </div>
+
+<article class="blog">
+
+  <h1 class="blog-title">{title}</h1>
+  <time class="blog-date">{date}</time>
+
+  <div class="blog-content">
+    <slot />
+  </div>
+</article>

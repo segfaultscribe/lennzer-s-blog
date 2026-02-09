@@ -1,0 +1,165 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600&display=swap');
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #737373;
+  --border: #e5e5e5;
+  --accent: #3b82f6;
+}
+
+
+/* ---------- Index Page Layout ---------- */
+html {
+  background: var(--bg);
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  background: #fffef9;
+}
+
+body {
+  margin: 0;
+  font-family: "Crimson Pro", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+  max-width: 80ch;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+main h2 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  /* text-transform: uppercase; */
+  color: var(--muted);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.bio {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 65ch;
+  margin: 1.5rem 0 3rem;
+}
+
+.bio mark {
+  background: linear-gradient(120deg, #fef3c7 0%, #fef3c7 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 85%;
+  color: inherit;
+  padding: 0 0.15em;
+}
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-list li {
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-list li:last-child {
+  border-bottom: none;
+}
+
+.blog-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem 0;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.2s;
+  gap: 1rem;
+}
+
+.blog-list a:hover {
+  color: var(--accent);
+  padding-left: 0.5rem;
+}
+
+.post-title {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  flex: 1;
+}
+
+.post-meta {
+  font-size: 0.875rem;
+  color: var(--muted);
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.blog-list a:hover .post-meta {
+  color: var(--text-secondary);
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 2.0rem;
+  color: var(--text);
+}
+
+/* footer {
+  margin-top: 4rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+} */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}

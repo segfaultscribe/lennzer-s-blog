@@ -1,0 +1,120 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const pageTitle = 'Lennzer\'s Blog';
+const name = "Adithya Krishna"
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Navigation />
+	<main>
+	<h2>Hi there!</h2>
+	<h1>
+    	I’m <span id="animated-name"></span>
+  	</h1>
+	<!-- <p class="bio">
+		I'm a <mark>software engineer</mark> building tools for the web. 
+		I write about <mark>systems design</mark>, <mark>developer experience</mark>, 
+		and the occasional deep dive into <mark>performance optimization</mark>.
+	</p> -->
+	<p class="bio">
+		I am a <mark>software engineer</mark> primarily working on <mark>Backend systems</mark>, <mark>Tooling</mark>, <mark>Automation</mark> and <mark>Infrastructure</mark>. 
+		I build systems that are simple, well thought out, and don’t break in surprising ways. 
+		I have a <mark>computer science</mark> background and experience working on production systems. 
+		<br/>
+		<br/>
+		This blog is where I write about what I’m <mark>learning</mark>, how I think about <mark>building software</mark>, and what I’ve picked up along the way from working on real systems.
+		(P.S. Lennzer is a pen name / online handle 😋).
+	</p>
+	
+	<h2>WRITINGS</h2>
+	<ul class="blog-list">
+		<!-- <li>
+		<a href="/posts/blogpost">
+			<span class="post-title">My First Blog Post</span>
+			<span class="post-meta">Feb 9, 2026 · 5 min read</span>
+		</a>
+		</li> -->
+		<li>
+		<a href="/posts/cache-go-page">
+			<span class="post-title">Sharing a Cache Safely Across HTTP Handlers in Go</span>
+			<span class="post-meta">Dec 17, 2025 · 5 min read</span>
+		</a>
+		</li>
+		<li>
+		<a href="/posts/sched-ops">
+			<span class="post-title">Scheduling in Operating Systems</span>
+			<span class="post-meta">July 25, 2025 · 15 min read</span>
+		</a>
+		</li>
+	</ul>
+	</main>
+    <Footer />
+  </body>
+  <script type="module">
+	import anime from 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.es.js';
+
+	document.addEventListener('DOMContentLoaded', () => {
+	const nameEl = document.getElementById('animated-name');
+	const names = ['Adithya Krishna', 'Lennzer']; // your two names
+	let i = 0;
+
+	// Split initial text into spans for animation
+	function splitLetters(text) {
+		return text.split('').map(char => {
+		const span = document.createElement('span');
+		span.textContent = char === ' ' ? '\u00A0' : char;
+		span.style.display = 'inline-block';
+		return span;
+		});
+	}
+
+	function animateSwap() {
+		// Fade out current letters
+		anime({
+		targets: '#animated-name span',
+		translateY: [0, -20],
+		opacity: [1, 0],
+		easing: 'easeInBack',
+		duration: 200,
+		delay: anime.stagger(30),
+		complete: () => {
+			// Swap name
+			i = (i + 1) % names.length;
+			nameEl.textContent = '';
+			const spans = splitLetters(names[i]);
+			spans.forEach(s => nameEl.appendChild(s));
+
+			// Fade in new letters
+			anime({
+			targets: '#animated-name span',
+			translateY: [20, 0],
+			opacity: [0, 1],
+			easing: 'easeOutBack',
+			duration: 200,
+			delay: anime.stagger(30),
+			});
+		},
+		});
+	}
+
+	// Initial split for first name
+	const initialSpans = splitLetters(names[i]);
+	initialSpans.forEach(s => nameEl.appendChild(s));
+
+	// Swap every 3 seconds
+	setInterval(animateSwap, 3000);
+	});
+	</script>
+
+</html>

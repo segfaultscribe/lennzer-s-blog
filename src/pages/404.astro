@@ -1,0 +1,30 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/404.css';
+
+const pageTitle = '404 - Page Not Found';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Navigation />
+    <main class="error-page">
+      <div class="error-content">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-message">Page Not Found</h2>
+        <p class="error-description">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <a href="/" class="home-link">← Back to Home</a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
