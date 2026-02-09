@@ -163,3 +163,14 @@ footer a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.3);
 }
+
+/* Custom text selection color */
+::selection {
+  background: #fef3c7;  /* Light yellow */
+  color: #1a1a1a;       /* Keep text dark for readability */
+}
+
+::-moz-selection {
+  background: #fef3c7;  /* Firefox */
+  color: #1a1a1a;
+}
