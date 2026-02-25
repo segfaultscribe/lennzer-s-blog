@@ -1,79 +1,113 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Jolly+Lodger&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
-/* Scope everything under .navbar-main */
 .navbar-main {
-  all: unset;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  position: sticky;           /* stick to top on scroll */
-  top: 10px;
+  position: sticky;
+  top: 0;
   z-index: 100;
-
-  width: 100%;                /* full viewport width */
-  max-width: 1200px;
-  height: 75px;          /* same on all pages */
+  max-width: 680px;             /* matches main's max-width in global.css */
   margin: 0 auto;
-
-  padding: 1rem 1.5rem;       /* consistent padding */
-  box-sizing: border-box;     /* include padding in width */
-  color: var(--text);
-  font-family: 'Space Mono', monospace;
-
-  min-height: 48px;           /* consistent height */
-}
-
-
-/* Reset inherited styles inside navbar */
-.navbar-main * {
+  padding: 1.25rem 1rem;       /* matches main's padding: 0 1rem */
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  background: #fffef9;         /* matches html background in global.css */
+  border-bottom: 1px solid var(--border);
 }
 
-/* Left section (title) */
-.navbar-main .navbar-title {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+/* Title */
+.navbar-title a {
+  font-family: "Crimson Pro", Georgia, serif, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1rem;
-  background: #ffd500;
-  line-height: 1; /* prevents collapsing height */
-}
-
-/* Split letters for animation */
-.navbar-main .navbar-title a {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.navbar-main .navbar-title a span {
-  display: inline-block;
-  will-change: transform, opacity;
-}
-
-/* Hover animation effect */
-.navbar-main .navbar-title a:hover {
-  color: rgb(255, 255, 255);
-  opacity: 0.8;
-}
-
-/* Right section links */
-.navbar-main .right a {
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--text);
   text-decoration: none;
-  font-weight: 500;
+  background: #fef3c7;         /* matches mark + ::selection yellow */
+  padding: 0.3rem 0.55rem;
+  transition: background 0.2s, color 0.2s;
 }
 
-/* Optional: subtle hover effect for right links */
-.navbar-main .right a:hover {
-  opacity: 0.8;
+.navbar-title a:hover {
+  background: var(--text);
+  color: #fef3c7;
+}
+
+/* Nav links */
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navbar-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--muted);
   text-decoration: none;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: var(--text);
+  border-bottom-color: #fef3c7;
+}
+
+ /* OWL WRAP */
+  .owl-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .owl-bubble {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text);
+    background: var(--yellow);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(3px);
+    transition: opacity 0.18s, transform 0.18s;
+    pointer-events: none;
+  }
+  .owl-bubble::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 3px solid transparent;
+    border-left-color: var(--yellow);
+  }
+  .owl-wrap:hover .owl-bubble,
+  .owl-wrap.active .owl-bubble {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .owl-canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    width: 48px;
+    height: 48px;
+  }
+
+
+@media (max-width: 768px) {
+  .navbar-main {
+    padding: 1rem;
+  }
+
+  .navbar-links {
+    gap: 1rem;
+  }
 }

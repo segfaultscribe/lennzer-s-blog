@@ -1,0 +1,64 @@
+---
+import "../styles/b-card.css"
+const imageSrc = "https://i.pinimg.com/736x/19/df/28/19df289285601fe6169d2e590364589f.jpg"
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+  <!-- light sweep -->
+  <div class="card__glare"></div>
+
+  <!-- corner brackets -->
+  <div class="card__corners">
+    <span class="card__corner-bl"></span>
+    <span class="card__corner-br"></span>
+  </div>
+
+  <!-- registration dots -->
+  <div class="card__dot card__dot--tl"></div>
+  <div class="card__dot card__dot--tr"></div>
+  <div class="card__dot card__dot--bl"></div>
+  <div class="card__dot card__dot--br"></div>
+
+  <div class="card__inner">
+    <!-- photo -->
+    <div class="card__photo">
+      <img src={imageSrc} alt="image" />
+    </div>
+
+    <!-- text -->
+    <div class="card__info">
+      <div class="card__identity">
+        <h1 class="card__name">Lennzer</h1>
+        <p class="card__designation">Backend Engineer</p>
+        <p class="card__subtitle">Freelancer</p>
+      </div>
+
+      <div class="card__stack">
+        <span class="card__bubble">Go</span>
+        <span class="card__bubble">TypeScript</span>
+        <span class="card__bubble">Dist. Systems</span>
+        <!-- <span class="card__bubble">gRPC</span>
+        <span class="card__bubble">Kafka</span> -->
+      </div>
+
+      <div class="card__url"><a href="https://github.com/segfaultscribe" target="_blank" rel="noopener noreferrer">github.com/segfaultscribe</a></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

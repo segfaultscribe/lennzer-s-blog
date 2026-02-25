@@ -6,8 +6,9 @@ import '../styles/navbar.css';
   <div class="left navbar-title">
     <a href="/">Lennzer's Blog</a>
   </div>
-  <div class="right">
-    <a href="/"> </a>
+  <div class="owl-wrap" id="owlWrap">
+    <div class="owl-bubble" id="owlBubble">hoot!</div>
+    <canvas class="owl-canvas" id="owlCanvas" width="16" height="16"></canvas>
   </div>
 </div>
 
@@ -45,4 +46,206 @@ import '../styles/navbar.css';
       });
     });
   });
+
+  const canvas = document.getElementById('owlCanvas');
+  const ctx = canvas.getContext('2d');
+  const wrap = document.getElementById('owlWrap');
+  const bubble = document.getElementById('owlBubble');
+
+  // 16x16 pixel owl
+  // 0=transparent, 1=darkbrown, 2=brown, 3=tan, 4=cream, 5=yellow(beak/feet), 6=black(pupil), 7=white, 8=orange, 9=darkest
+
+  const C = {
+    0: null,
+    1: '#3d2b1f',
+    2: '#6b4226',
+    3: '#a0632a',
+    4: '#d4a96a',
+    5: '#f5c518',
+    6: '#1a1a1a',
+    7: '#f5f0e8',
+    8: '#e07b39',
+    9: '#2a1a0e',
+  };
+
+  // Each frame is 16 rows x 16 cols
+  const idle = [
+    [0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0],
+    [0,0,1,2,2,2,1,0,1,2,2,2,1,0,0,0],
+    [0,1,2,3,3,3,2,1,2,3,3,3,2,1,0,0],
+    [0,1,2,3,2,3,2,1,2,3,2,3,2,1,0,0],
+    [0,0,1,2,2,2,1,1,1,2,2,2,1,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [0,0,1,4,7,7,4,4,4,7,7,4,1,0,0,0],
+    [0,0,1,4,7,6,4,5,4,6,7,4,1,0,0,0],
+    [0,0,1,4,7,7,4,4,4,7,7,4,1,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [0,0,1,3,4,4,3,3,3,4,4,3,1,0,0,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,0,1,3,3,4,4,4,4,4,3,3,1,0,0,0],
+    [0,0,0,1,5,5,1,0,1,5,5,1,0,0,0,0],
+    [0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+  ];
+
+  // blink: eyes become horizontal lines
+  const blink = [
+    [0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0],
+    [0,0,1,2,2,2,1,0,1,2,2,2,1,0,0,0],
+    [0,1,2,3,3,3,2,1,2,3,3,3,2,1,0,0],
+    [0,1,2,3,2,3,2,1,2,3,2,3,2,1,0,0],
+    [0,0,1,2,2,2,1,1,1,2,2,2,1,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [0,0,1,4,4,4,4,4,4,4,4,4,1,0,0,0],
+    [0,0,1,4,6,6,4,5,4,6,6,4,1,0,0,0],
+    [0,0,1,4,4,4,4,4,4,4,4,4,1,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [0,0,1,3,4,4,3,3,3,4,4,3,1,0,0,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,0,1,3,3,4,4,4,4,4,3,3,1,0,0,0],
+    [0,0,0,1,5,5,1,0,1,5,5,1,0,0,0,0],
+    [0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+  ];
+
+  // hover: ears perk up higher, pupils enlarge
+  const hover = [
+    [0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0],
+    [0,1,2,2,1,0,0,0,0,1,2,2,1,0,0,0],
+    [1,2,3,3,2,1,0,0,1,2,3,3,2,1,0,0],
+    [0,1,2,3,2,1,1,1,1,2,3,2,1,0,0,0],
+    [0,0,1,2,2,2,1,1,2,2,2,1,0,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [0,0,1,4,7,7,4,4,4,7,7,4,1,0,0,0],
+    [0,0,1,4,7,6,4,5,4,6,7,4,1,0,0,0],
+    [0,0,1,4,7,7,4,4,4,7,7,4,1,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [0,0,1,3,4,4,3,3,3,4,4,3,1,0,0,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,0,1,3,3,4,4,4,4,4,3,3,1,0,0,0],
+    [0,0,0,1,5,5,1,0,1,5,5,1,0,0,0,0],
+    [0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+  ];
+
+  // happy: wings slightly raised, stars/sparkles for eyes
+  const happy = [
+    [0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0],
+    [0,0,1,2,2,2,1,0,1,2,2,2,1,0,0,0],
+    [0,1,2,3,3,3,2,1,2,3,3,3,2,1,0,0],
+    [0,1,2,3,2,3,2,1,2,3,2,3,2,1,0,0],
+    [0,0,1,2,2,2,1,1,1,2,2,2,1,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [0,0,1,4,5,7,4,4,4,7,5,4,1,0,0,0],
+    [0,0,1,4,7,5,4,5,4,5,7,4,1,0,0,0],
+    [0,0,1,4,4,7,4,4,4,7,4,4,1,0,0,0],
+    [0,0,0,1,4,4,4,4,4,4,4,1,0,0,0,0],
+    [1,0,1,3,4,4,3,3,3,4,4,3,1,0,1,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,1,3,4,4,4,4,4,4,4,4,4,3,1,0,0],
+    [0,0,1,3,3,4,4,4,4,4,3,3,1,0,0,0],
+    [0,0,0,1,5,5,1,0,1,5,5,1,0,0,0,0],
+    [0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+  ];
+
+  // thinking: head tilted — shift columns slightly
+  const thinking = [
+    [0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0],
+    [0,0,0,1,2,2,2,1,0,1,2,2,2,1,0,0],
+    [0,0,1,2,3,3,3,2,1,2,3,3,3,2,1,0],
+    [0,0,1,2,3,2,3,2,1,2,3,2,3,2,1,0],
+    [0,0,0,1,2,2,2,1,1,1,2,2,2,1,0,0],
+    [0,0,0,0,1,4,4,4,4,4,4,4,1,0,0,0],
+    [0,0,0,1,4,7,7,4,4,4,7,7,4,1,0,0],
+    [0,0,0,1,4,7,6,4,5,4,6,7,4,1,0,0],
+    [0,0,0,1,4,7,7,4,4,4,7,7,4,1,0,0],
+    [0,0,0,0,1,4,4,4,4,4,4,4,1,0,0,0],
+    [0,0,0,1,3,4,4,3,3,3,4,4,3,1,0,0],
+    [0,0,1,3,4,4,4,4,4,4,4,4,4,3,1,0],
+    [0,0,1,3,4,4,4,4,4,4,4,4,4,3,1,0],
+    [0,0,0,1,3,3,4,4,4,4,4,3,3,1,0,0],
+    [0,0,0,0,1,5,5,1,0,1,5,5,1,0,0,0],
+    [0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0],
+  ];
+
+  function draw(frame) {
+    ctx.clearRect(0, 0, 16, 16);
+    for (let y = 0; y < 16; y++) {
+      for (let x = 0; x < 16; x++) {
+        const k = frame[y][x];
+        if (k === 0) continue;
+        ctx.fillStyle = C[k];
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+  }
+
+  let state = 'idle';
+  let blinkTimer, returnTimer;
+
+  const hoverMsgs = ['hoot!', 'hello!', 'who?', '*stares*', 'oh hai', 'hoo hoo'];
+  const clickMsgs = ['♥ ♥', 'hOOt!!', '*flaps*', 'u found me', 'so happy!'];
+
+  function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function scheduleBlink() {
+    clearTimeout(blinkTimer);
+    const delay = 2500 + Math.random() * 3500;
+    blinkTimer = setTimeout(() => {
+      if (state !== 'idle') return scheduleBlink();
+      draw(blink);
+      setTimeout(() => {
+        if (state === 'idle') draw(idle);
+        scheduleBlink();
+      }, 100);
+    }, delay);
+  }
+
+  function goIdle() {
+    state = 'idle';
+    draw(idle);
+    scheduleBlink();
+  }
+
+  // Occasional head tilt while idle
+  function scheduleThink() {
+    setTimeout(() => {
+      if (state !== 'idle') return scheduleThink();
+      draw(thinking);
+      setTimeout(() => {
+        if (state === 'idle') draw(idle);
+        setTimeout(scheduleThink, 5000 + Math.random() * 8000);
+      }, 600);
+    }, 6000 + Math.random() * 6000);
+  }
+
+  wrap.addEventListener('mouseenter', () => {
+    if (state === 'happy') return;
+    clearTimeout(blinkTimer);
+    state = 'hover';
+    draw(hover);
+    bubble.textContent = rand(hoverMsgs);
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    if (state === 'happy') return;
+    goIdle();
+  });
+
+  wrap.addEventListener('click', () => {
+    clearTimeout(blinkTimer);
+    clearTimeout(returnTimer);
+    state = 'happy';
+    draw(happy);
+    bubble.textContent = rand(clickMsgs);
+    wrap.classList.add('active');
+    returnTimer = setTimeout(() => {
+      wrap.classList.remove('active');
+      goIdle();
+    }, 2000);
+  });
+
+  goIdle();
+  scheduleThink();
+
 </script>
