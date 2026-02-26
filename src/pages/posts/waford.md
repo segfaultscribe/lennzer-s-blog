@@ -23,7 +23,7 @@ You receive a payload on the `/ingress` endpoint and you need to send it as a PO
 
 Initially, I wrote a simple `/ingress` endpoint that accepts the payload and wraps it with a `Job` struct.
 
-```Go
+```go
 type Job struct {
     EventID     string          `json:"event_id"`
     Payload     json.RawMessage `json:"payload"`
