@@ -1,6 +1,6 @@
 ---
-import * as greatPost from './cache-go.md';
-import { Content } from './cache-go.md';
+import * as greatPost from './waford.md';
+import { Content } from './waford.md';
 // import '../../styles/global.css';
 import '../../styles/blog.css';
 import Navigation from '../../components/Navigation.astro';
@@ -12,16 +12,6 @@ import Footer from '../../components/Footer.astro';
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <Navigation />
-<!-- <div>
-    {greatPost.frontmatter.hero && (
-    <img
-      src={greatPost.frontmatter.hero}
-      alt=""
-      class="blog-hero"
-      loading="eager"
-    />
-  )}
-</div> -->
 <article class="blog">
 
   <h1 class="blog-title">{greatPost.frontmatter.title}</h1>

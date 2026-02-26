@@ -163,7 +163,7 @@ body {
 
 .blog-content code {
   font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-  font-size: 0.775em;
+  font-size: 0.675em;
   background: var(--code-bg);
   color: #e11d48;
   padding: 0.2em 0.4em;
