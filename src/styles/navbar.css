@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
 
-  position: sticky;           /* stick to top on scroll */
+  position: relative;           /* stick to top on scroll */
   top: 10px;
   z-index: 100;
 
@@ -23,7 +23,8 @@
   padding: 1rem 1.5rem;       /* consistent padding */
   box-sizing: border-box;     /* include padding in width */
   color: var(--text);
-  font-family: 'Space Mono', monospace;
+  font-family: "Crimson Pro", Georgia, serif;
+  font-weight: 600;
 
   min-height: 48px;           /* consistent height */
 }
@@ -42,8 +43,12 @@
   align-items: center;
   padding: 0.5rem 0.75rem 0.5rem 0.75rem;
   font-size: 1rem;
-  background: #ffd500;
   line-height: 1; /* prevents collapsing height */
+  background-color: #FFFCE8;
+  border: 2px solid #ffd500;
+  border-radius: 6px;
+  opacity: 1;
+  
 }
 
 /* Split letters for animation */
@@ -59,11 +64,23 @@
   will-change: transform, opacity;
 }
 
-/* Hover animation effect */
+.navbar-main .navbar-title:hover {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 0 6px rgba(255, 68, 0, 0.4);
+  background: #FFFCE8;
+  opacity: 1;
+}
+
+/* Hover animation effect
 .navbar-main .navbar-title a:hover {
   color: rgb(255, 255, 255);
   opacity: 0.8;
-}
+} */
+
+
 
 /* Right section links */
 .navbar-main .right a {

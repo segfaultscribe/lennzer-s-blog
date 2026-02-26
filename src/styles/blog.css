@@ -269,6 +269,32 @@ body {
   background: #f9fafb;
 }
 
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35rem 0.7rem;
+
+  border-radius: 6px;              /* more square, less pill */
+  border: 2px solid #FFF94A;       /* accent border */                  /* accent text */
+  color: #1A1A1A;
+  background: transparent;         /* no fill */
+
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tag:hover {
+  box-shadow: 0 0 6px rgba(255, 68, 0, 0.4);
+  background: #FFFCE8;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 768px) {

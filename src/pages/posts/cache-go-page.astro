@@ -26,6 +26,11 @@ import Footer from '../../components/Footer.astro';
 
   <h1 class="blog-title">{greatPost.frontmatter.title}</h1>
   <time class="blog-date">{greatPost.frontmatter.date}</time>
+  <div class="tags">
+  {greatPost.frontmatter.tags?.map((tag: string) => (
+    <span class="tag">{tag}</span>
+  ))}
+</div>
 
   <div class="blog-content">
     <Content />

@@ -3,6 +3,7 @@
 title: 'Scheduling in Operating systems'
 date: '2025-07-25'
 hero: ''
+tags: ["operating systems", "scheduling"]
 ---
 
 An <span style="color: #E4004B">Operating System</span> is much like a conductor in an orchestra. The OS, instead of managing musicians, orchestrates the processes in a computer system. It aims for two things: Efficiency and Control. One of the major responsibilities that the OS carries is deciding which program to run and when, a concept known as <span style="color: #E4004B">scheduling</span>. 

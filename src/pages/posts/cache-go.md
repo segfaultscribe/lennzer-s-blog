@@ -2,6 +2,7 @@
 title: 'Sharing a Cache Safely Across HTTP Handlers in Go'
 date: '2025-12-17'
 hero: ''
+tags: ["go", "concurrency", "backend"]
 ---
 ![cache function image](https://github.com/The-Lennzer/images/blob/main/tech%20images/cache-go.png?raw=true)
 I've been working on a URL Shortener in Go and I know it isn't much but I believe it's a solid project to understand the fundaments when working with a new language.
