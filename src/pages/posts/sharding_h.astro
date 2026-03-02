@@ -1,0 +1,30 @@
+---
+import * as greatPost from './dbsharding.md';
+import { Content } from './dbsharding.md';
+// import '../../styles/global.css';
+import '../../styles/blog.css';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<Navigation />
+<article class="blog">
+
+  <h1 class="blog-title">{greatPost.frontmatter.title}</h1>
+  <time class="blog-date">{greatPost.frontmatter.date}</time>
+  <div class="tags">
+    {greatPost.frontmatter.tags?.map((tag: string) => (
+      <span class="tag">{tag}</span>
+    ))}
+  </div>
+
+  <div class="blog-content">
+    <Content />
+  </div>
+</article>
+
+<Footer />
